@@ -1,4 +1,4 @@
-var guesses = 0;
+var guesses = 5;
 var currentword = [];
 var playingarray = [];
 
@@ -48,32 +48,36 @@ function updatePlayingArray(value) {
 }
 
 
-function clearPlayArea() {
-    var containerdiv = document.getElementById("stuffcontainer");
-    containerdiv.parentNode.removeChild(containerdiv);
+// function clearPlayArea() {
+//     var containerdiv = document.getElementById("stuffcontainer");
+//     containerdiv.parentNode.removeChild(containerdiv);
 
-}
+// }
+
+// function displayPlayArea() {
+//     var maincontainer = document.getElementById("maincontainer");
+//         var createul = document.createElement("ul");
+//         createul.id = "stuffcontainer";
+//         createul.className = "list-inline d-flex justify-content-center";
+//         maincontainer.appendChild(createul);
+//     for (i = 0; i < randomwordlength; i++) {
+//         var mydiv = document.getElementById("stuffcontainer");
+//         var creatediv = document.createElement("li");
+//         creatediv.id = 'wordnumber' + i;
+//         creatediv.className = "list-inline-item";
+//         mydiv.appendChild(creatediv);
+//         creatediv.appendChild(document.createTextNode(playingarray[i]));
+//     }
+// }
 
 function displayPlayArea() {
-    for (i = 0; i < randomwordlength; i++) {
-        var maincontainer = document.getElementById("maincontainer");
-        var createul = document.createElement("ul");
-        createul.id = "stuffcontainer";
-        createul.className = "list-inline d-flex justify-content-center";
-        maincontainer.appendChild(createul);
-        var mydiv = document.getElementById("stuffcontainer");
-        var creatediv = document.createElement("li");
-        creatediv.id = 'wordnumber' + i;
-        creatediv.className = "list-inline-item";
-        mydiv.appendChild(creatediv);
-        creatediv.appendChild(document.createTextNode(playingarray[i]));
-    }
-    console.log(guesses);
+    document.getElementById("stuffcontainer").innerHTML = playingarray.join(" ")
 
 }
+
 function gameBuilder() {
-    clearPlayArea();
-    guesses = 0;
+    // clearPlayArea();
+    guesses = 5;
     currentword = [];
     playingarray = [];
     randomword = words.getrandomword();
@@ -82,26 +86,28 @@ function gameBuilder() {
     setInitialArray();
     displayPlayArea();
     console.log(randomword);
+    document.getElementById("guesses").innerHTML = "Number of Tries left: " + guesses;
 };
 
 
 function submitMe() {
+
     var inputvalue = document.getElementById('inputdefault').value;
-    clearPlayArea();
+    // clearPlayArea();
     updatePlayingArray(inputvalue);
     displayPlayArea();
     var arraycontains = currentword.includes(inputvalue)
     var arraycontainsunderscore = playingarray.includes("_")
     if (arraycontains !== true) {
-        guesses++;
+        guesses--;
     }
-    if (guesses >= 5) {
+    if (guesses <= 0) {
         gameBuilder();
     }
     if (arraycontainsunderscore === false) {
         gameBuilder();
     }
-
+    document.getElementById("guesses").innerHTML = "Number of Tries left: " + guesses;
 }
 
 

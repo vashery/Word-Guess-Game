@@ -27,14 +27,15 @@
             <form class="form-inline d-flex justify-content-center">
                 <div class="form-group mx-sm-3">
                     <label for="inputdefault" class="sr-only">test</label>
-                    <input type="text" class="form-control" id="inputdefault" placeholder="Enter Letter Here">
+                    <input type="text" maxlength="1" class="form-control" id="inputdefault" placeholder="Enter Letter Here">
                 </div>
                 <button onclick="submitMe('inputdefault')" type="button" class="btn btn-primary">Submit</button>
             </form>
             <br>
-            <ul id="stuffcontainer" class="list-inline d-flex justify-content-center">
+            <div id="stuffcontainer" class="d-flex justify-content-center">
 
-            </ul>
+            </div>
+            <div id="guesses" class="d-flex justify-content-center"></div>
 
         </div>
 

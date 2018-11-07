@@ -1,7 +1,9 @@
+var wins = 0;
+var losses = 0;
 var guesses = 5;
 var currentword = [];
 var playingarray = [];
-
+var guessedletters = [];
 
 var words = {
     name: "words",
@@ -36,6 +38,9 @@ function setInitialArray() {
     }
 };
 
+function updateGuessedLetterArray(value) {
+        guessedletters.push(value);
+};
 
 
 function updatePlayingArray(value) {
@@ -47,46 +52,25 @@ function updatePlayingArray(value) {
 
 }
 
-
-// function clearPlayArea() {
-//     var containerdiv = document.getElementById("stuffcontainer");
-//     containerdiv.parentNode.removeChild(containerdiv);
-
-// }
-
-// function displayPlayArea() {
-//     var maincontainer = document.getElementById("maincontainer");
-//         var createul = document.createElement("ul");
-//         createul.id = "stuffcontainer";
-//         createul.className = "list-inline d-flex justify-content-center";
-//         maincontainer.appendChild(createul);
-//     for (i = 0; i < randomwordlength; i++) {
-//         var mydiv = document.getElementById("stuffcontainer");
-//         var creatediv = document.createElement("li");
-//         creatediv.id = 'wordnumber' + i;
-//         creatediv.className = "list-inline-item";
-//         mydiv.appendChild(creatediv);
-//         creatediv.appendChild(document.createTextNode(playingarray[i]));
-//     }
-// }
-
 function displayPlayArea() {
     document.getElementById("stuffcontainer").innerHTML = playingarray.join(" ")
 
 }
 
 function gameBuilder() {
-    // clearPlayArea();
     guesses = 5;
     currentword = [];
     playingarray = [];
+    guessedletters = [];
     randomword = words.getrandomword();
     randomwordlength = words.getwordlength(randomword);
     loadCurrentWordArray();
     setInitialArray();
     displayPlayArea();
-    console.log(randomword);
     document.getElementById("guesses").innerHTML = "Number of Tries left: " + guesses;
+    document.getElementById("numberofwins").innerHTML = "Number of Wins: " + wins;
+    document.getElementById("numberoflosses").innerHTML = "Number of Losses: " + losses;
+    document.getElementById("lettersguessed").innerHTML = "Letters Guessed: ";
 };
 
 
@@ -98,25 +82,39 @@ function submitMe() {
     displayPlayArea();
     var arraycontains = currentword.includes(inputvalue)
     var arraycontainsunderscore = playingarray.includes("_")
+    var arrayguessedcontains = guessedletters.includes(inputvalue);
     if (arraycontains !== true) {
         guesses--;
+        updateGuessedLetterArray(inputvalue);
+        
     }
     if (guesses <= 0) {
+        alert("You Loose! :(");
         gameBuilder();
+        losses++;
+
     }
     if (arraycontainsunderscore === false) {
         gameBuilder();
+        alert("You Win!");
+        wins++;
+
     }
     document.getElementById("guesses").innerHTML = "Number of Tries left: " + guesses;
+    document.getElementById("numberofwins").innerHTML = "Number of Wins: " + wins;
+    document.getElementById("numberoflosses").innerHTML = "Number of Losses: " + losses;
+
+    if (arrayguessedcontains !== true) {
+        document.getElementById("lettersguessed").innerHTML = "Letters Guessed: " + guessedletters.join(" ");
+
+    }
+    document.getElementById('inputdefault').value='';
+
+    
+
+
 }
-
-
-
-
-
-
 console.log(randomword);
-console.log(words.getwordlength(randomword));
 
 
 

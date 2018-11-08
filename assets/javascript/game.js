@@ -1,13 +1,14 @@
 var wins = 0;
 var losses = 0;
 var guesses = 5;
+var anykeypressed = false;
 var currentword = [];
 var playingarray = [];
 var guessedletters = [];
 
 var words = {
     name: "words",
-    wordlist: ["abaft", "rapid", "magic", "spread", "seashore", "account", "rest", "spiky", "decision", "nifty"],
+    wordlist: ["sky", "blueberry", "ocean", "cookiemonster", "sea", "glitter", "crayon", "butterfly", "lego", "smurf", "stitch", 'eyes', "dory", "sully", "the genie", "sonic", "flik"],
     getrandomword: function () {
         var arraylenght = this.wordlist.length;
         var randomnumber = Math.floor((Math.random() * arraylenght));
@@ -17,8 +18,30 @@ var words = {
         return word.length;
     }
 };
+function stopRKey(evt) {
+    var evt = (evt) ? evt : ((event) ? event : null);
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+    if ((evt.keyCode == 13))  {return false;}
+  }
+  
+  document.onkeypress = stopRKey;
+
 var randomword = words.getrandomword();
 var randomwordlength = words.getwordlength(randomword);
+document.onkeyup = function(event) {
+    if (anykeypressed === false && event.key !== "Meta") {
+        document.getElementById("maincontainer").classList.remove('hidden');
+        document.getElementById("headercontainer").classList.remove("hidden");
+        document.getElementById("tempcontainer").classList.add("hidden");
+        anykeypressed = true;
+
+    }
+    if (event.key === "Enter") {
+        submitMe()
+        
+    }
+}
+
 
 
 gameBuilder();
@@ -75,6 +98,7 @@ function gameBuilder() {
 
 
 function submitMe() {
+    
 
     var inputvalue = document.getElementById('inputdefault').value;
     // clearPlayArea();
@@ -114,7 +138,7 @@ function submitMe() {
 
 
 }
-console.log(randomword);
+
 
 
 

@@ -1,12 +1,20 @@
+body {
+    background-color: #ABFFFF;
+}
+
+.hidden {
+    display: none
+}
+
 #stuffcontainer {
-    font-size: 50px;
+    color: #052B2B;
 }
 .container {
-    font-size: 30px;
+    font-size: 50px;
 }
-.hidden {
-display: none;
+h3 {
+    font-size: 60px;
 }
-.nothidden {
-
+.jumbotron {
+    background-color: #1BFFFF;
 }

@@ -5,25 +5,25 @@ var anykeypressed = false;
 var currentword = [];
 var playingarray = [];
 var guessedletters = [];
+var wordlist = ["sky", "blueberry", "ocean", "cookiemonster", "sea", "glitter", "crayon", "butterfly", "lego", "smurf", "stitch", 'eyes', "dory", "sully", "the genie", "sonic", "flik"];
 
-var words = {
-    name: "words",
-    wordlist: ["sky", "blueberry", "ocean", "cookiemonster", "sea", "glitter", "crayon", "butterfly", "lego", "smurf", "stitch", 'eyes', "dory", "sully", "the genie", "sonic", "flik"],
-    getrandomword: function () {
-        var arraylenght = this.wordlist.length;
-        var randomnumber = Math.floor((Math.random() * arraylenght));
-        return this.wordlist[randomnumber];
-    },
-    getwordlength: function (word) {
-        return word.length;
-    }
+function getrandomword() {
+    var arraylenght = wordlist.length;
+    var randomnumber = Math.floor((Math.random() * arraylenght));
+    return wordlist[randomnumber];
+};
+
+function getwordlength(word) {
+    return word.length;
 };
 
 function stopRKey(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-    if ((evt.keyCode == 13)) { return false; }
-}
+    if ((evt.keyCode == 13)) {
+        return false; 
+    }
+};
 
 function loadCurrentWordArray() {
 
@@ -52,20 +52,20 @@ function updatePlayingArray(value) {
         }
     }
 
-}
+};
 
 function displayPlayArea() {
     document.getElementById("stuffcontainer").innerHTML = playingarray.join(" ")
 
-}
+};
 
 function gameBuilder() {
     guesses = 5;
     currentword = [];
     playingarray = [];
     guessedletters = [];
-    randomword = words.getrandomword();
-    randomwordlength = words.getwordlength(randomword);
+    randomword = getrandomword();
+    randomwordlength = getwordlength(randomword);
     loadCurrentWordArray();
     setInitialArray();
     displayPlayArea();
@@ -110,7 +110,7 @@ function submitMe() {
 
     }
     document.getElementById('inputdefault').value = '';
-}
+};
 document.onkeyup = function (event) {
     if (anykeypressed === false && event.key !== "Meta") {
         document.getElementById("maincontainer").classList.remove('hidden');
@@ -123,10 +123,10 @@ document.onkeyup = function (event) {
         submitMe()
 
     }
-}
+};
 document.onkeypress = stopRKey;
-var randomword = words.getrandomword();
-var randomwordlength = words.getwordlength(randomword);
+var randomword = getrandomword();
+var randomwordlength = getwordlength(randomword);
 gameBuilder();
 
 

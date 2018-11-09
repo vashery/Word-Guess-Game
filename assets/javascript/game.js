@@ -18,33 +18,12 @@ var words = {
         return word.length;
     }
 };
+
 function stopRKey(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-    if ((evt.keyCode == 13))  {return false;}
-  }
-  
-  document.onkeypress = stopRKey;
-
-var randomword = words.getrandomword();
-var randomwordlength = words.getwordlength(randomword);
-document.onkeyup = function(event) {
-    if (anykeypressed === false && event.key !== "Meta") {
-        document.getElementById("maincontainer").classList.remove('hidden');
-        document.getElementById("headercontainer").classList.remove("hidden");
-        document.getElementById("tempcontainer").classList.add("hidden");
-        anykeypressed = true;
-
-    }
-    if (event.key === "Enter") {
-        submitMe()
-        
-    }
+    if ((evt.keyCode == 13)) { return false; }
 }
-
-
-
-gameBuilder();
 
 function loadCurrentWordArray() {
 
@@ -62,7 +41,7 @@ function setInitialArray() {
 };
 
 function updateGuessedLetterArray(value) {
-        guessedletters.push(value);
+    guessedletters.push(value);
 };
 
 
@@ -98,10 +77,7 @@ function gameBuilder() {
 
 
 function submitMe() {
-    
-
     var inputvalue = document.getElementById('inputdefault').value;
-    // clearPlayArea();
     updatePlayingArray(inputvalue);
     displayPlayArea();
     var arraycontains = currentword.includes(inputvalue)
@@ -110,7 +86,7 @@ function submitMe() {
     if (arraycontains !== true) {
         guesses--;
         updateGuessedLetterArray(inputvalue);
-        
+
     }
     if (guesses <= 0) {
         alert("You Loose! :(");
@@ -132,12 +108,26 @@ function submitMe() {
         document.getElementById("lettersguessed").innerHTML = "Letters Guessed: " + guessedletters.join(" ");
 
     }
-    document.getElementById('inputdefault').value='';
-
-    
-
-
+    document.getElementById('inputdefault').value = '';
 }
+document.onkeyup = function (event) {
+    if (anykeypressed === false && event.key !== "Meta") {
+        document.getElementById("maincontainer").classList.remove('hidden');
+        document.getElementById("headercontainer").classList.remove("hidden");
+        document.getElementById("tempcontainer").classList.add("hidden");
+        anykeypressed = true;
+
+    }
+    if (event.key === "Enter") {
+        submitMe()
+
+    }
+}
+document.onkeypress = stopRKey;
+var randomword = words.getrandomword();
+var randomwordlength = words.getwordlength(randomword);
+gameBuilder();
+
 
 
 

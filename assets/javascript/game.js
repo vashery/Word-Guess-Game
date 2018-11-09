@@ -80,10 +80,11 @@ function submitMe() {
     var inputvalue = document.getElementById('inputdefault').value;
     updatePlayingArray(inputvalue);
     displayPlayArea();
-    var arraycontains = currentword.includes(inputvalue)
-    var arraycontainsunderscore = playingarray.includes("_")
+    var arraycontains = currentword.includes(inputvalue);
+    var letterarraycontains = guessedletters.includes(inputvalue);
+    var arraycontainsunderscore = playingarray.includes("_");
     var arrayguessedcontains = guessedletters.includes(inputvalue);
-    if (arraycontains !== true) {
+    if (arraycontains !== true && letterarraycontains !== true) {
         guesses--;
         updateGuessedLetterArray(inputvalue);
 
